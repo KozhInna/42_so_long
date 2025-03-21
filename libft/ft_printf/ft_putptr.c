@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 14:04:08 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/21 15:15:20 by ikozhina         ###   ########.fr       */
+/*   Created: 2024/12/03 11:48:01 by ikozhina          #+#    #+#             */
+/*   Updated: 2025/03/16 22:19:28 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"../libft.h"
 
-t_list	*ft_lstnew(void *content)
+int	ft_putptr(void *ptr, int base, char l)
 {
-	t_list	*pnt;
+	int	count;
+	int	res;
 
-	pnt = malloc(sizeof(t_list));
-	if (!pnt)
-		return (NULL);
-	pnt->content = content;
-	pnt->next = NULL;
-	return (pnt);
+	count = 0;
+	if (!ptr)
+	{
+		if (write(1, "(nil)", 5) == -1)
+			return (-1);
+		return (5);
+	}
+	if (write(1, "0x", 2) == -1)
+		return (-1);
+	count += 2;
+	res = ft_putnbr_unsigned((uintptr_t)ptr, base, l);
+	if (res == -1)
+		return (-1);
+	count += res;
+	return (count);
 }

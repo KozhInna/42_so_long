@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 14:04:08 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/21 15:15:20 by ikozhina         ###   ########.fr       */
+/*   Created: 2024/11/28 10:03:48 by ikozhina          #+#    #+#             */
+/*   Updated: 2025/03/16 22:19:32 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"../libft.h"
 
-t_list	*ft_lstnew(void *content)
+int	ft_putstr(char *s)
 {
-	t_list	*pnt;
+	int	length;
 
-	pnt = malloc(sizeof(t_list));
-	if (!pnt)
-		return (NULL);
-	pnt->content = content;
-	pnt->next = NULL;
-	return (pnt);
+	length = 0;
+	if (s == NULL)
+	{
+		if (write(1, "(null)", 6) == -1)
+			return (-1);
+		return (6);
+	}
+	while (s[length])
+	{
+		if (ft_putchar(s[length]) == -1)
+			return (-1);
+		length ++;
+	}
+	return (length);
 }

@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 14:04:08 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/21 15:15:20 by ikozhina         ###   ########.fr       */
+/*   Created: 2025/03/21 13:58:33 by ikozhina          #+#    #+#             */
+/*   Updated: 2025/03/21 13:58:35 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	t_list	*pnt;
+	size_t	i;
 
-	pnt = malloc(sizeof(t_list));
-	if (!pnt)
-		return (NULL);
-	pnt->content = content;
-	pnt->next = NULL;
-	return (pnt);
+	i = 0;
+	while ((unsigned char)s1[i] != '\0' && (unsigned char)s2[i] != '\0')
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

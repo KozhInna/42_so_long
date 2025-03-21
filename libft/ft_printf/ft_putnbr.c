@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 14:04:08 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/21 15:15:20 by ikozhina         ###   ########.fr       */
+/*   Created: 2024/11/13 10:34:57 by ikozhina          #+#    #+#             */
+/*   Updated: 2025/03/16 22:19:22 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"../libft.h"
 
-t_list	*ft_lstnew(void *content)
+int	ft_putnbr(int n)
 {
-	t_list	*pnt;
+	char	c;
+	long	i;
+	int		count;
 
-	pnt = malloc(sizeof(t_list));
-	if (!pnt)
-		return (NULL);
-	pnt->content = content;
-	pnt->next = NULL;
-	return (pnt);
+	i = n;
+	count = 0;
+	if (i < 0)
+	{
+		if (ft_putchar('-') == -1)
+			return (-1);
+		count++;
+		i = -i;
+	}
+	if (i >= 10)
+		count += ft_putnbr(i / 10);
+	i = i % 10;
+	c = i + '0';
+	if (ft_putchar(c) == -1)
+		return (-1);
+	count++;
+	return (count);
 }
