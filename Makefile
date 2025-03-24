@@ -6,7 +6,7 @@
 #    By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/21 14:44:32 by ikozhina          #+#    #+#              #
-#    Updated: 2025/03/21 15:08:15 by ikozhina         ###   ########.fr        #
+#    Updated: 2025/03/24 14:45:23 by ikozhina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 
 FLAGS = -Werror -Wextra -Wall -I./libft -I./include
 
-SRCS = src/so_long_main.c
+SRCS = src/so_long_main.c src/validate_argv.c src/validate_map.c
 
 OBJS = $(SRCS:.c=.o)
 
