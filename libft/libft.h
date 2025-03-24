@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:52:00 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/21 13:59:49 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/24 15:06:41 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stddef.h>
 # include <stdarg.h>
 # include <stdint.h>
+
+# define BUFFER_SIZE 2
 
 // Linked List Struct
 typedef struct s_list
@@ -47,6 +49,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	**ft_split(char const *s, char c);
 size_t	ft_strlen(const char *s);
+char	*get_next_line(int fd);
 
 // Output Functions
 void	ft_putchar_fd(char c, int fd);
