@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:49:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/24 14:45:54 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/25 10:22:57 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 # include "libft.h"
 # include <fcntl.h>
 
+/*delete lib below*/
 #include <stdio.h>
 
 typedef struct s_map
 {
 	char **map_data;
+	size_t rows;
+	size_t columns;
 } t_map;
 
 void	validate_argv(int argc, char **argv);
