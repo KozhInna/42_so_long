@@ -1,0 +1,122 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/26 11:18:34 by ikozhina          #+#    #+#             */
+/*   Updated: 2025/03/26 11:41:26 by ikozhina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long.h"
+
+void	initialise_struct(t_map **map, size_t rows)
+{
+	size_t	i;
+
+	i = 0;
+	(*map) = malloc(sizeof(t_map));
+	if (!(*map))
+		return ;
+	(*map)->rows = rows;
+	(*map)->columns = 0;
+	(*map)->map_data = malloc(sizeof(char *) * rows);
+	if (!(*map)->map_data)
+	{
+		free(*map);
+		(*map) = NULL;
+		return ;
+	}
+	while (i < rows)
+		(*map)->map_data[i++] = NULL;
+}
+
+size_t	count_rows(int fd)
+{
+	char	*line_read;
+	size_t	rows_count;
+
+	line_read = NULL;
+	rows_count = 0;
+	while (1)
+	{
+		line_read = get_next_line(fd);
+		if (line_read == NULL)
+			break ;
+		if (line_read != NULL)
+		{
+			rows_count++;
+			free(line_read);
+		}
+	}
+	return (rows_count);
+}
+
+int	store_map_line(char *line_read, t_map *map, size_t i)
+{
+	char	*newline_ptr;
+
+	newline_ptr = ft_strchr(line_read, '\n');
+	if (newline_ptr != NULL)
+		*newline_ptr = '\0';
+	map->map_data[i] = ft_strdup(line_read);
+	if (!map->map_data[i])
+	{
+		while (i > 0)
+			free(map->map_data[--i]);
+		free(map->map_data);
+		free(map);
+		free(line_read);
+		return (-1);
+	}
+	free(line_read);
+	return (0);
+}
+void	read_and_store_map_lines(int fd, t_map *map)
+{
+	char	*line_read;
+	size_t	i;
+
+	line_read = NULL;
+	i = 0;
+	while (i < map->rows)
+	{
+		line_read = get_next_line(fd);
+		if (line_read == NULL)
+			break ;
+		if (store_map_line(line_read, map, i) != 0)
+			exit(1);
+		i++;
+	}
+	printf("from parse func 2 row - \n%s\n", map->map_data[1]);
+}
+
+void	parse_map(char *map_file)
+{
+	int		fd;
+	size_t	rows;
+	size_t	i;
+	t_map	*map;
+
+	i = 0;
+	map = NULL;
+	fd = open(map_file, O_RDONLY);
+	if (fd == -1)
+		exit(1);
+	rows = count_rows(fd);
+	close(fd);
+	initialise_struct(&map, rows);
+	if (!map)
+		return ;
+	fd = open(map_file, O_RDONLY);
+	read_and_store_map_lines(fd, map);
+	close(fd);
+	printf("from validate map 2 row - \n%s\n", map->map_data[1]);
+	printf("number of lines - %ld\n", rows);
+	while (i < rows)
+		free(map->map_data[i++]);
+	free(map->map_data);
+	free(map);
+}

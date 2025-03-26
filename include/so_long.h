@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:49:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/25 10:22:57 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:43:04 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ typedef struct s_map
 
 void	validate_argv(int argc, char **argv);
 void	validate_map(char *map_file);
+void	parse_map(char *map_file);
 
 #endif
