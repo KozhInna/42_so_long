@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:18:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/26 11:41:26 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/26 12:52:02 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	read_and_store_map_lines(int fd, t_map *map)
 	printf("from parse func 2 row - \n%s\n", map->map_data[1]);
 }
 
-void	parse_map(char *map_file)
+t_map	*parse_map(char *map_file)
 {
 	int		fd;
 	size_t	rows;
@@ -104,13 +104,15 @@ void	parse_map(char *map_file)
 	map = NULL;
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
-		exit(1);
+		return (NULL);
 	rows = count_rows(fd);
 	close(fd);
 	initialise_struct(&map, rows);
 	if (!map)
-		return ;
+		return (NULL);
 	fd = open(map_file, O_RDONLY);
+	if (fd == -1)
+		return (NULL);
 	read_and_store_map_lines(fd, map);
 	close(fd);
 	printf("from validate map 2 row - \n%s\n", map->map_data[1]);
@@ -119,4 +121,5 @@ void	parse_map(char *map_file)
 		free(map->map_data[i++]);
 	free(map->map_data);
 	free(map);
+	return(map);
 }
