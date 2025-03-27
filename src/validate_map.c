@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 12:32:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/27 10:37:32 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/27 15:14:23 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,29 @@ void	check_walls(t_map *map)
 	}
 }
 
+void	check_valid_components(t_map *map)
+{
+	size_t i;
+	size_t j;
+
+	i = 0;
+	while (i < map->rows)
+	{
+		j = 0;
+		while (map->map_data[i][j])
+		{
+			if (!ft_strchr("01CEP", map->map_data[i][j]))
+			{
+				ft_putstr_fd("Error\nMap must be composed of only these characters: 0, 1, C, E, P\n", 2);
+				safe_exit(map);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+
 
 int	validate_map(char *map_file)
 {
@@ -83,6 +106,10 @@ int	validate_map(char *map_file)
 		safe_exit(map);
 	is_ractangular(map);
 	check_walls(map);
+	check_valid_components(map);
+	// check_duplicates(map);
 	printf("valid map\n");
+	// free all
+	// safe_exit(map);
 	return (1);
 }
