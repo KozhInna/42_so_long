@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:49:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/27 15:22:31 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/30 23:53:54 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,27 @@
 typedef struct s_map
 {
 	char **map_data;
-	size_t rows;
-	size_t columns;
+	int rows;
+	int cols;
+	int exit;
+	int collectibles;
 } t_map;
 
+typedef struct game
+{
+	mlx_t *mlx;
+	t_map *map;
+	int width;
+	int height;
+	mlx_image_t *img_player;
+	mlx_image_t *img_exit;
+	mlx_image_t *img_collectible;
+	mlx_image_t *img_wall;
+	mlx_image_t *img_floor;
+} t_game;
+
 void	validate_argv(int argc, char **argv);
-int	validate_map(char *map_file);
+int		validate_map(char *map_file);
 t_map	*parse_map(char *map_file);
 
 #endif

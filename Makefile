@@ -6,7 +6,7 @@
 #    By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/21 14:44:32 by ikozhina          #+#    #+#              #
-#    Updated: 2025/03/27 13:48:03 by ikozhina         ###   ########.fr        #
+#    Updated: 2025/03/28 13:24:13 by ikozhina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME = so_long
 CC = cc
 
 FLAGS = -Werror -Wextra -Wall -I./libft -I./include -I./MLX42/include -Wunreachable-code -Ofast
-LDFLAGS = -ldl -lglfw -pthread -lm
+LDFLAGS = -lglfw -L"/opt/homebrew/Cellar/glfw/3.4/lib/" -framework Cocoa -framework OpenGL -framework IOKit
+#LDFLAGS = -ldl -lglfw -pthread -lm
 
 MLX_PATH = ./MLX42
 MLX_REPO = https://github.com/codam-coding-college/MLX42.git

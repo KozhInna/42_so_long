@@ -6,22 +6,22 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:18:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/26 22:49:14 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/30 23:32:28 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	initialise_struct(t_map **map, size_t rows)
+void	initialise_struct(t_map **map, int rows)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	(*map) = malloc(sizeof(t_map));
 	if (!(*map))
 		return ;
 	(*map)->rows = rows;
-	(*map)->columns = 0;
+	(*map)->cols = 0;
 	(*map)->map_data = malloc(sizeof(char *) * rows);
 	if (!(*map)->map_data)
 	{
@@ -33,10 +33,10 @@ void	initialise_struct(t_map **map, size_t rows)
 		(*map)->map_data[i++] = NULL;
 }
 
-size_t	count_rows(int fd)
+int	count_rows(int fd)
 {
 	char	*line_read;
-	size_t	rows_count;
+	int	rows_count;
 
 	line_read = NULL;
 	rows_count = 0;
@@ -54,7 +54,7 @@ size_t	count_rows(int fd)
 	return (rows_count);
 }
 
-int	store_map_line(char *line_read, t_map *map, size_t i)
+int	store_map_line(char *line_read, t_map *map, int i)
 {
 	char	*newline_ptr;
 	
@@ -79,7 +79,7 @@ int	store_map_line(char *line_read, t_map *map, size_t i)
 void	read_and_store_map_lines(int fd, t_map *map)
 {
 	char	*line_read;
-	size_t	i;
+	int	i;
 
 	line_read = NULL;
 	i = 0;
@@ -98,7 +98,7 @@ void	read_and_store_map_lines(int fd, t_map *map)
 t_map	*parse_map(char *map_file)
 {
 	int		fd;
-	size_t	rows;
+	int	rows;
 	t_map	*map;
 
 	map = NULL;

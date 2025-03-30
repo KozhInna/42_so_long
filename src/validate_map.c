@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 12:32:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/27 15:14:23 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/30 23:53:41 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	safe_exit(t_map *map)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	if (!map)
@@ -28,19 +28,19 @@ void	safe_exit(t_map *map)
 
 void	is_ractangular(t_map *map)
 {
-	size_t i;
+	int i;
 
-	map->columns = ft_strlen(map->map_data[0]);
+	map->cols = ft_strlen(map->map_data[0]);
 	i = 1;
 	while (i < map->rows)
 	{
-		if (map->columns != ft_strlen(map->map_data[i++]))
+		if (map->cols != (int)ft_strlen(map->map_data[i++]))
 		{
 			ft_putstr_fd("Error\nMap must be rectangular\n", 2);
 			safe_exit(map);
 		}
 	}
-	if (map->rows == map->columns)
+	if (map->rows == map->cols)
 	{
 		ft_putstr_fd("Error\nMap must be rectangular\n", 2);
 		safe_exit(map);
@@ -48,8 +48,8 @@ void	is_ractangular(t_map *map)
 }
 void	check_walls(t_map *map)
 {
-	size_t i;
-	size_t j;
+	int i;
+	int j;
 
 	i = 0;
 	while (i < map->rows)
@@ -62,7 +62,7 @@ void	check_walls(t_map *map)
 				ft_putstr_fd("Error\nMap must be surrounded by walls\n", 2);
 				safe_exit(map);
 			}
-			if ((j == 0 || j == map->columns - 1) && map->map_data[i][j] != '1')
+			if ((j == 0 || j == map->cols - 1) && map->map_data[i][j] != '1')
 			{
 				ft_putstr_fd("Error\nMap must be surrounded by walls\n", 2);
 				safe_exit(map);
@@ -75,8 +75,8 @@ void	check_walls(t_map *map)
 
 void	check_valid_components(t_map *map)
 {
-	size_t i;
-	size_t j;
+	int i;
+	int j;
 
 	i = 0;
 	while (i < map->rows)
