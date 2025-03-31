@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:18:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/30 23:32:28 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:47:56 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	initialise_struct(t_map **map, int rows)
 		return ;
 	(*map)->rows = rows;
 	(*map)->cols = 0;
+	(*map)->pl_x = 0;
+	(*map)->pl_y = 0;
 	(*map)->map_data = malloc(sizeof(char *) * rows);
 	if (!(*map)->map_data)
 	{
@@ -57,7 +59,7 @@ int	count_rows(int fd)
 int	store_map_line(char *line_read, t_map *map, int i)
 {
 	char	*newline_ptr;
-	
+
 	if (!line_read)
 		return (1);
 	newline_ptr = ft_strchr(line_read, '\n');
