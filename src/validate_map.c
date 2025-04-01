@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 12:32:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/31 13:53:46 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:14:44 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	check_valid_components(t_map *map)
 			{
 				map->pl_x = j;
 				map->pl_y = i;
-				printf("X - %d, y -%d\n", map->pl_x, map->pl_y);
 			}
 			if (!ft_strchr("01CEP", map->map_data[i][j]))
 			{
@@ -101,6 +100,27 @@ void	check_valid_components(t_map *map)
 	}
 }
 
+void	count_collectibles(t_map *map)
+{
+	int i;
+	int j;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (i < map->rows)
+	{
+		j = 0;
+		while (map->map_data[i][j])
+		{
+			if (map->map_data[i][j] == 'C')
+				count++;
+			j++;
+		}
+		i++;
+	}
+	map->collectibles = count;
+}
 
 
 t_map	*validate_map(char *map_file)
@@ -113,8 +133,9 @@ t_map	*validate_map(char *map_file)
 	is_ractangular(map);
 	check_walls(map);
 	check_valid_components(map);
+	count_collectibles(map);
 	// check_duplicates(map);
-	printf("valid map\n");
+	// printf("valid map\n");
 	// free all
 	// safe_exit(map);
 	return (map);

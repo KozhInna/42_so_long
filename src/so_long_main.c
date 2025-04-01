@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:51:03 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/31 14:55:48 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/01 10:20:43 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int main(int argc, char **argv)
 
 	// mlx_close_hook(game.mlx, handle_close, &game);
 
-	mlx_key_hook(game.mlx, moves, &game);
+	mlx_key_hook(game.mlx, handle_click, &game);
 	mlx_loop(game.mlx);
+	mlx_terminate(game.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:49:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/31 14:58:33 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:30:05 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_map
 	char **map_data;
 	int rows;
 	int cols;
-	int exit;
 	int collectibles;
 	int pl_x;
 	int pl_y;
@@ -45,8 +44,6 @@ typedef struct game
 {
 	mlx_t *mlx;
 	t_map *map;
-	// int width;
-	// int height;
 	mlx_image_t *img_player;
 	mlx_image_t *img_exit;
 	mlx_image_t *img_collectible;
@@ -58,6 +55,9 @@ void	validate_argv(int argc, char **argv);
 t_map	*validate_map(char *map_file);
 t_map	*parse_map(char *map_file);
 void	game_init(t_game *game, t_map *map);
-mlx_keyfunc	moves(mlx_key_data_t key, void *parameter);
+void	handle_click(mlx_key_data_t keydata, void *parameter);
+void	safe_exit(t_map *map);
+void	render_image(mlx_t *mlx, mlx_image_t *img, int x, int y);
+void	convert_to_image(t_game *game, char *path, mlx_image_t **item);
 
 #endif

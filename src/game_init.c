@@ -6,15 +6,14 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:14:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/31 14:27:47 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/01 22:43:37 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include"so_long.h"
 
 void	convert_to_image(t_game *game, char *path, mlx_image_t **item)
 {
-	// Try to load the file
 	mlx_texture_t* texture;
 	texture = mlx_load_png(path);
 	if (!texture)
@@ -23,7 +22,7 @@ void	convert_to_image(t_game *game, char *path, mlx_image_t **item)
 	(*item) = mlx_texture_to_image(game->mlx, texture);
 	if (!item)
 		exit(EXIT_FAILURE);
-	mlx_delete_texture(texture);
+	// mlx_delete_texture(texture);
 }
 
 void	render_image(mlx_t *mlx, mlx_image_t *img, int x, int y)
@@ -32,12 +31,28 @@ void	render_image(mlx_t *mlx, mlx_image_t *img, int x, int y)
 		exit(EXIT_FAILURE);
 }
 
-void	render_board(t_game *game, t_map *map)
+void	render_floor(t_game *game, t_map *map)
 {
 	int i;
 	int j;
 
-	// create_image(&game);
+	i = 0;
+	while (i < map->rows)
+	{
+		j = 0;
+		while (j < map->cols)
+		{
+			render_image(game->mlx, game->img_floor, j * 64, i * 64);
+			j++;
+		}
+		i++;
+	}
+}
+void	render_walls(t_game *game, t_map *map)
+{
+	int i;
+	int j;
+
 	i = 0;
 	while (i < map->rows)
 	{
@@ -48,8 +63,6 @@ void	render_board(t_game *game, t_map *map)
 				render_image(game->mlx, game->img_wall, j * 64, i * 64);
 			else if (map->map_data[i][j] == 'E')
 				render_image(game->mlx, game->img_exit, j * 64, i * 64);
-			else
-				render_image(game->mlx, game->img_floor, j * 64, i * 64);
 			j++;
 		}
 		i++;
@@ -92,15 +105,11 @@ void	game_init(t_game *game, t_map *map)
 	game->mlx = mlx_init(map->cols * 64, map->rows * 64, "42Balls", true);
 	if (!game->mlx)
 	{
-		// fprintf(stderr, "%s", mlx_strerror(mlx_errno));
+		ft_putstr_fd("MLX failed to initialize\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	png_to_mlx(game);
-	render_board(game, map);
+	render_floor(game, map);
+	render_walls(game, map);
 	render_items(game, map);
-	// mlx_key_hook(game->mlx, moves, game);
-	// mlx_loop(game->mlx);
-	// mlx_delete_image(game->mlx, game->img_wall);
-	// mlx_delete_image(game->mlx, game->img_floor);
-	// mlx_terminate(game->mlx);
 }
