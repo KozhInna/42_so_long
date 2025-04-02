@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 12:32:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/01 11:14:44 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:50:40 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,17 @@ void	safe_exit(t_map *map)
 
 	i = 0;
 	if (!map)
-		exit(1);
+		return ;
 	while (i < map->rows)
-		free(map->map_data[i++]);
+	{
+		free(map->map_data[i]);
+		map->map_data[i] = NULL;
+		i++;
+	}
 	free(map->map_data);
+	map->map_data = NULL;
 	free(map);
-	exit(1);
+	map = NULL;
 }
 
 void	is_ractangular(t_map *map)
@@ -38,12 +43,14 @@ void	is_ractangular(t_map *map)
 		{
 			ft_putstr_fd("Error\nMap must be rectangular\n", 2);
 			safe_exit(map);
+			exit(1);
 		}
 	}
 	if (map->rows == map->cols)
 	{
 		ft_putstr_fd("Error\nMap must be rectangular\n", 2);
 		safe_exit(map);
+		exit(1);
 	}
 }
 void	check_walls(t_map *map)
@@ -61,11 +68,13 @@ void	check_walls(t_map *map)
 			{
 				ft_putstr_fd("Error\nMap must be surrounded by walls\n", 2);
 				safe_exit(map);
+				exit(1);
 			}
 			if ((j == 0 || j == map->cols - 1) && map->map_data[i][j] != '1')
 			{
 				ft_putstr_fd("Error\nMap must be surrounded by walls\n", 2);
 				safe_exit(map);
+				exit(1);
 			}
 			j++;
 		}
@@ -93,6 +102,7 @@ void	check_valid_components(t_map *map)
 			{
 				ft_putstr_fd("Error\nMap must be composed of only these characters: 0, 1, C, E, P\n", 2);
 				safe_exit(map);
+				exit(1);
 			}
 			j++;
 		}
@@ -134,6 +144,8 @@ t_map	*validate_map(char *map_file)
 	check_walls(map);
 	check_valid_components(map);
 	count_collectibles(map);
+	map->width = map->cols * TILE_SIZE;
+	map->height = map->rows * TILE_SIZE;
 	// check_duplicates(map);
 	// printf("valid map\n");
 	// free all

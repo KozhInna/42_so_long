@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:14:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/01 22:43:37 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:33:07 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	convert_to_image(t_game *game, char *path, mlx_image_t **item)
 	(*item) = mlx_texture_to_image(game->mlx, texture);
 	if (!item)
 		exit(EXIT_FAILURE);
-	// mlx_delete_texture(texture);
+	mlx_delete_texture(texture);
 }
 
 void	render_image(mlx_t *mlx, mlx_image_t *img, int x, int y)
@@ -42,7 +42,7 @@ void	render_floor(t_game *game, t_map *map)
 		j = 0;
 		while (j < map->cols)
 		{
-			render_image(game->mlx, game->img_floor, j * 64, i * 64);
+			render_image(game->mlx, game->img_floor, j * TILE_SIZE, i * TILE_SIZE);
 			j++;
 		}
 		i++;
@@ -60,9 +60,9 @@ void	render_walls(t_game *game, t_map *map)
 		while (j < map->cols)
 		{
 			if (map->map_data[i][j] == '1')
-				render_image(game->mlx, game->img_wall, j * 64, i * 64);
+				render_image(game->mlx, game->img_wall, j * TILE_SIZE, i * TILE_SIZE);
 			else if (map->map_data[i][j] == 'E')
-				render_image(game->mlx, game->img_exit, j * 64, i * 64);
+				render_image(game->mlx, game->img_exit, j * TILE_SIZE, i * TILE_SIZE);
 			j++;
 		}
 		i++;
@@ -81,9 +81,9 @@ void	render_items(t_game *game, t_map *map)
 		while (j < map->cols)
 		{
 			if (map->map_data[i][j] == 'P')
-				render_image(game->mlx, game->img_player, j * 64, i * 64);
+				render_image(game->mlx, game->img_player, j * TILE_SIZE, i * TILE_SIZE);
 			else if (map->map_data[i][j] == 'C')
-				render_image(game->mlx, game->img_collectible, j * 64, i * 64);
+				render_image(game->mlx, game->img_collectible, j * TILE_SIZE, i * TILE_SIZE);
 			j++;
 		}
 		i++;
@@ -98,16 +98,41 @@ void	png_to_mlx(t_game *game)
 	convert_to_image(game, PLAYER, &game->img_player);
 	convert_to_image(game, ITEM, &game->img_collectible);
 }
-
+void initialise_struct(t_game *game)
+{
+	game->mlx = NULL;
+	game->map = NULL;
+	game->img_player = NULL;
+	game->img_exit = NULL;
+	game->img_collectible = NULL;
+	game->img_wall = NULL;
+	game->img_floor = NULL;
+	game->move_count = 0;
+}
 
 void	game_init(t_game *game, t_map *map)
 {
-	game->mlx = mlx_init(map->cols * 64, map->rows * 64, "42Balls", true);
+	int32_t screen_width;
+	int32_t screen_height;
+
+	initialise_struct(game);
+	game->map = map;
+	game->mlx = mlx_init(map->cols * TILE_SIZE, map->rows * TILE_SIZE, "so_long", false);
 	if (!game->mlx)
 	{
 		ft_putstr_fd("MLX failed to initialize\n", 2);
-		exit(EXIT_FAILURE);
+		safe_exit(map);
+		exit(1);
 	}
+	mlx_get_monitor_size(0, &screen_width, &screen_height);
+	printf("map width - %d, map height - %d\n width - %d, screen height - %d\n", map->width, map->height, screen_width, screen_height);
+	if (map->height > screen_height || map->width > screen_width)
+	{
+		ft_putstr_fd("Error\nMap is too big for the current monitor.\n", 1);
+		safe_exit(map);
+		exit(1);
+	}
+
 	png_to_mlx(game);
 	render_floor(game, map);
 	render_walls(game, map);

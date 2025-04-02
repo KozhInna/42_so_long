@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:51:03 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/01 10:20:43 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/02 13:37:43 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,11 @@ int main(int argc, char **argv)
 	t_map	*map;
 
 	validate_argv(argc, argv);
-
-	printf("here1");
 	map = validate_map(argv[1]);
 	if (!map)
 		exit(EXIT_FAILURE);
-	game.map = map;
-	printf("here");
 	game_init(&game, map);
-	// render_board(game, map);
-	// game.img_wall->instances->x = new_x * 64;
-
-
-	// mlx_close_hook(game.mlx, handle_close, &game);
-
+	mlx_close_hook(game.mlx, close_game, &game);
 	mlx_key_hook(game.mlx, handle_click, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);

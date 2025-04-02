@@ -6,13 +6,13 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:18:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/31 13:47:56 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:55:45 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	initialise_struct(t_map **map, int rows)
+void	initialise_map(t_map **map, int rows)
 {
 	int	i;
 
@@ -22,6 +22,9 @@ void	initialise_struct(t_map **map, int rows)
 		return ;
 	(*map)->rows = rows;
 	(*map)->cols = 0;
+	(*map)->collectibles = 0;
+	(*map)->width = 0;
+	(*map)->height = 0;
 	(*map)->pl_x = 0;
 	(*map)->pl_y = 0;
 	(*map)->map_data = malloc(sizeof(char *) * rows);
@@ -109,7 +112,7 @@ t_map	*parse_map(char *map_file)
 		return (NULL);
 	rows = count_rows(fd);
 	close(fd);
-	initialise_struct(&map, rows);
+	initialise_map(&map, rows);
 	if (!map)
 		return (NULL);
 	fd = open(map_file, O_RDONLY);
