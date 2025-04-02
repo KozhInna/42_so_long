@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:18:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/02 12:55:45 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:12:20 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void	read_and_store_map_lines(int fd, t_map *map)
 			exit(1);
 		i++;
 	}
-	printf("from parse func 2 row - \n%s\n", map->map_data[1]);
 }
 
 t_map	*parse_map(char *map_file)
@@ -109,7 +108,10 @@ t_map	*parse_map(char *map_file)
 	map = NULL;
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
+	{
+		ft_putstr_fd("Error\nMap doesn't exist in this directory\n", 2);
 		return (NULL);
+	}
 	rows = count_rows(fd);
 	close(fd);
 	initialise_map(&map, rows);
@@ -120,7 +122,5 @@ t_map	*parse_map(char *map_file)
 		return (NULL);
 	read_and_store_map_lines(fd, map);
 	close(fd);
-	// printf("from validate map 2 row - \n%s\n", map->map_data[1]);
-	// printf("number of lines - %ld\n", rows);
 	return(map);
 }

@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:14:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/02 14:33:07 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:08:33 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ void	convert_to_image(t_game *game, char *path, mlx_image_t **item)
 	mlx_texture_t* texture;
 	texture = mlx_load_png(path);
 	if (!texture)
-		exit(EXIT_FAILURE);
+		exit(1);
 
 	(*item) = mlx_texture_to_image(game->mlx, texture);
 	if (!item)
-		exit(EXIT_FAILURE);
+		exit(1);
 	mlx_delete_texture(texture);
 }
 
 void	render_image(mlx_t *mlx, mlx_image_t *img, int x, int y)
 {
 	if (mlx_image_to_window(mlx, img, x, y) < 0)
-		exit(EXIT_FAILURE);
+		exit(1);
 }
 
 void	render_floor(t_game *game, t_map *map)
@@ -125,14 +125,12 @@ void	game_init(t_game *game, t_map *map)
 		exit(1);
 	}
 	mlx_get_monitor_size(0, &screen_width, &screen_height);
-	printf("map width - %d, map height - %d\n width - %d, screen height - %d\n", map->width, map->height, screen_width, screen_height);
 	if (map->height > screen_height || map->width > screen_width)
 	{
 		ft_putstr_fd("Error\nMap is too big for the current monitor.\n", 1);
 		safe_exit(map);
 		exit(1);
 	}
-
 	png_to_mlx(game);
 	render_floor(game, map);
 	render_walls(game, map);
