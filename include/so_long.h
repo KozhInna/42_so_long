@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:49:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/02 13:23:55 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:23:50 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct s_map
 	int height;
 	int pl_x;
 	int pl_y;
+	int ex_x;
+	int ex_y;
 } t_map;
 
 typedef struct game
