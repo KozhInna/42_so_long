@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 13:25:43 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/02 14:49:01 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/03 12:59:40 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void handle_move(t_game *game, int new_x, int new_y)
 		if (game->map->collectibles == 0)
 		{
 			safe_exit(game->map);
-			ft_putstr_fd("You won!\n", 1);
+			ft_putstr_fd("Congratulations! You won!\n", 1);
 			exit(0);
 		}
 		return ;
