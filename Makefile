@@ -6,7 +6,7 @@
 #    By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/21 14:44:32 by ikozhina          #+#    #+#              #
-#    Updated: 2025/03/31 13:42:17 by ikozhina         ###   ########.fr        #
+#    Updated: 2025/04/04 10:18:45 by ikozhina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ MLX_PATH = ./MLX42
 MLX_REPO = https://github.com/codam-coding-college/MLX42.git
 
 SRCS = src/so_long_main.c src/validate_argv.c src/validate_map.c \
-		src/parse_map.c src/game_init.c src/handle_moves.c
+		src/parse_map.c src/game_init.c src/handle_moves.c src/validate_path.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -31,16 +31,18 @@ LIBFT = libft/libft.a
 LIBFT_PATH = libft
 
 
-all:  $(MLX_PATH) $(LIBFT) $(NAME)
+all: $(LIBFT) $(MLXLIB) $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX_PATH)
+$(NAME): $(OBJS) $(LIBFT) $(MLXLIB)
 	$(CC) $(FLAGS) $(OBJS) $(LIBFT) $(MLXLIB) $(LDFLAGS) -o $(NAME)
 
 #Clone and build MLX42
-$(MLX_PATH):
-	git clone $(MLX_REPO) $(MLX_PATH)
+$(MLXLIB): $(MLX_PATH)
 	cmake -B $(MLX_PATH)/build -S $(MLX_PATH) -DGLFW_BUILD_DOCS=OFF -DGLFW_BUILD_TESTS=OFF -DGLFW_BUILD_EXAMPLES=OFF
 	cmake --build $(MLX_PATH)/build
+
+$(MLX_PATH):
+	git clone $(MLX_REPO) $(MLX_PATH)
 
 mlx_update:
 	@if [ -d "$(MLX_PATH)" ]; then \
