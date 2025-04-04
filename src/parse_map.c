@@ -6,11 +6,11 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:18:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/02 15:12:20 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:56:33 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include"so_long.h"
 
 void	initialise_map(t_map **map, int rows)
 {
@@ -25,8 +25,10 @@ void	initialise_map(t_map **map, int rows)
 	(*map)->collectibles = 0;
 	(*map)->width = 0;
 	(*map)->height = 0;
-	(*map)->pl_x = 0;
-	(*map)->pl_y = 0;
+	(*map)->player.x = 0;
+	(*map)->player.y = 0;
+	(*map)->exit.x = 0;
+	(*map)->exit.y = 0;
 	(*map)->map_data = malloc(sizeof(char *) * rows);
 	if (!(*map)->map_data)
 	{

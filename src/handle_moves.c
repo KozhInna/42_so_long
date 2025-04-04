@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 13:25:43 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/03 12:59:40 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/04 13:06:19 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ void handle_move(t_game *game, int new_x, int new_y)
 	int y;
 	size_t	i;
 
-	// printf("instances %zu\n", game->img_collectible->count);
-	// printf("coll %d\n", game->map->collectibles);
-	x = game->map->pl_x;
-	y = game->map->pl_y;
+	x = game->map->player.x;
+	y = game->map->player.y;
 	if (game->map->map_data[new_y][new_x] == '1')
 		return ;
 	if (game->map->map_data[new_y][new_x] == '0' ||
@@ -32,8 +30,8 @@ void handle_move(t_game *game, int new_x, int new_y)
 			i = 0;
 			while (i < game->img_collectible->count)
 			{
-				if (game->img_collectible->instances[i].x == new_x * TILE_SIZE &&
-					game->img_collectible->instances[i].y == new_y * TILE_SIZE)
+				if (game->img_collectible->instances[i].x == new_x * T_SIZE &&
+					game->img_collectible->instances[i].y == new_y * T_SIZE)
 					game->img_collectible->instances[i].enabled = false;
 				i++;
 			}
@@ -41,10 +39,10 @@ void handle_move(t_game *game, int new_x, int new_y)
 		}
 		game->map->map_data[y][x] = '0';
 		game->map->map_data[new_y][new_x] = 'P';
-		game->map->pl_x = new_x;
-		game->map->pl_y = new_y;
-		game->img_player->instances[0].x = new_x * TILE_SIZE;
-		game->img_player->instances[0].y = new_y * TILE_SIZE;
+		game->map->player.x = new_x;
+		game->map->player.y = new_y;
+		game->img_player->instances[0].x = new_x * T_SIZE;
+		game->img_player->instances[0].y = new_y * T_SIZE;
 		game->move_count += 1;
 		ft_printf("Current move: %d\n", game->move_count);
 	}
@@ -58,9 +56,8 @@ void handle_move(t_game *game, int new_x, int new_y)
 		}
 		return ;
 	}
-	x = game->map->pl_x;
-	y = game->map->pl_y;
-	// printf("changed x - %d, y -%d\n", x, y);
+	x = game->map->player.x;
+	y = game->map->player.y;
 }
 
 void	close_game(void *parameter)
@@ -81,8 +78,8 @@ void	handle_click(mlx_key_data_t keydata, void *parameter)
 	int y;
 
 	game = (t_game *)parameter;
-	x = game->map->pl_x;
-	y = game->map->pl_y;
+	x = game->map->player.x;
+	y = game->map->player.y;
 	// printf("x - %d, y -%d\n", x, y);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		close_game(game);
