@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:14:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/02 15:08:33 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/04 10:35:03 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	convert_to_image(t_game *game, char *path, mlx_image_t **item)
 	texture = mlx_load_png(path);
 	if (!texture)
 		exit(1);
-
 	(*item) = mlx_texture_to_image(game->mlx, texture);
 	if (!item)
 		exit(1);
@@ -42,7 +41,7 @@ void	render_floor(t_game *game, t_map *map)
 		j = 0;
 		while (j < map->cols)
 		{
-			render_image(game->mlx, game->img_floor, j * TILE_SIZE, i * TILE_SIZE);
+			render_image(game->mlx, game->img_floor, j * T_SIZE, i * T_SIZE);
 			j++;
 		}
 		i++;
@@ -60,9 +59,9 @@ void	render_walls(t_game *game, t_map *map)
 		while (j < map->cols)
 		{
 			if (map->map_data[i][j] == '1')
-				render_image(game->mlx, game->img_wall, j * TILE_SIZE, i * TILE_SIZE);
+				render_image(game->mlx, game->img_wall, j * T_SIZE, i * T_SIZE);
 			else if (map->map_data[i][j] == 'E')
-				render_image(game->mlx, game->img_exit, j * TILE_SIZE, i * TILE_SIZE);
+				render_image(game->mlx, game->img_exit, j * T_SIZE, i * T_SIZE);
 			j++;
 		}
 		i++;
@@ -81,9 +80,9 @@ void	render_items(t_game *game, t_map *map)
 		while (j < map->cols)
 		{
 			if (map->map_data[i][j] == 'P')
-				render_image(game->mlx, game->img_player, j * TILE_SIZE, i * TILE_SIZE);
+				render_image(game->mlx, game->img_player, j * T_SIZE, i * T_SIZE);
 			else if (map->map_data[i][j] == 'C')
-				render_image(game->mlx, game->img_collectible, j * TILE_SIZE, i * TILE_SIZE);
+				render_image(game->mlx, game->img_collectible, j * T_SIZE, i * T_SIZE);
 			j++;
 		}
 		i++;
@@ -117,7 +116,7 @@ void	game_init(t_game *game, t_map *map)
 
 	initialise_struct(game);
 	game->map = map;
-	game->mlx = mlx_init(map->cols * TILE_SIZE, map->rows * TILE_SIZE, "so_long", false);
+	game->mlx = mlx_init(map->cols * T_SIZE, map->rows * T_SIZE, "so_long", false);
 	if (!game->mlx)
 	{
 		ft_putstr_fd("MLX failed to initialize\n", 2);
