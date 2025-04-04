@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:49:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/04 12:58:47 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:56:10 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define SO_LONG_H
 
 # include <MLX42/MLX42.h>
-# define WIDTH 800
-# define HEIGHT 600
 # define T_SIZE 100
 # include "libft.h"
 # include <fcntl.h>
@@ -71,5 +69,6 @@ void	render_image(mlx_t *mlx, mlx_image_t *img, int x, int y);
 void	convert_to_image(t_game *game, char *path, mlx_image_t **item);
 void	check_valid_player_position(t_map *map);
 void	close_game(void *parameter);
+int		flood_check(t_map *map, int (*func)(char **, t_map *, t_coords));
 
 #endif

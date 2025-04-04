@@ -6,7 +6,7 @@
 #    By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/21 14:44:32 by ikozhina          #+#    #+#              #
-#    Updated: 2025/04/04 10:18:45 by ikozhina         ###   ########.fr        #
+#    Updated: 2025/04/04 14:40:54 by ikozhina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ MLX_PATH = ./MLX42
 MLX_REPO = https://github.com/codam-coding-college/MLX42.git
 
 SRCS = src/so_long_main.c src/validate_argv.c src/validate_map.c \
-		src/parse_map.c src/game_init.c src/handle_moves.c src/validate_path.c
+		src/parse_map.c src/game_init.c src/handle_moves.c src/validate_path.c \
+		src/flood_check.c
 
 OBJS = $(SRCS:.c=.o)
 
