@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:48:49 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/04 14:49:39 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/05 11:28:20 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,10 @@ void	safe_exit(t_map *map)
 	map->map_data = NULL;
 	free(map);
 	map = NULL;
+}
+void error_exit(char *message, t_map *map)
+{
+	ft_putstr_fd(message, 2);
+	safe_exit(map);
+	exit(1);
 }

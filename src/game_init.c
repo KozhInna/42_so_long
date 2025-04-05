@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:14:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/04 10:35:03 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/05 11:28:47 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,18 +118,10 @@ void	game_init(t_game *game, t_map *map)
 	game->map = map;
 	game->mlx = mlx_init(map->cols * T_SIZE, map->rows * T_SIZE, "so_long", false);
 	if (!game->mlx)
-	{
-		ft_putstr_fd("MLX failed to initialize\n", 2);
-		safe_exit(map);
-		exit(1);
-	}
+		error_exit("MLX failed to initialize\n", map);
 	mlx_get_monitor_size(0, &screen_width, &screen_height);
 	if (map->height > screen_height || map->width > screen_width)
-	{
-		ft_putstr_fd("Error\nMap is too big for the current monitor.\n", 1);
-		safe_exit(map);
-		exit(1);
-	}
+		error_exit("Error\nMap is too big for the current monitor.\n", map);
 	png_to_mlx(game);
 	render_floor(game, map);
 	render_walls(game, map);

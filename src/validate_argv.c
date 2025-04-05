@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:27:41 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/24 15:01:20 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/05 11:42:48 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,12 @@ static void	check_file_extension(char **argv)
 	char *dot_ptr;
 
 	dot_ptr = ft_strrchr(argv[1], '.');
-	if (dot_ptr == NULL)
+	if (!dot_ptr || ft_strcmp(dot_ptr, ".ber") != 0)
 	{
 		ft_printf("Error\nUsage: %s %s (file must have .ber extension)\n", argv[0], argv[1]);
 		exit(1);
 	}
-	if ((ft_strcmp(dot_ptr, ".ber") != 0))
-	{
-		ft_printf("Error\nUsage: %s %s (file must have .ber extension)\n", argv[0], argv[1]);
-		exit(1);
-	}
-	if (argv[1][0] == '.')
+	if (ft_strcmp(argv[1], ".ber") == 0)
 	{
 		ft_printf("Error\nUsage: %s %s (file can't be a hidden file)\n", argv[0], argv[1]);
 		exit(1);
