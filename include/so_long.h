@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:49:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/05 11:28:33 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/05 14:20:26 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct game
 	t_map *map;
 	mlx_image_t *img_player;
 	mlx_image_t *img_exit;
-	mlx_image_t *img_collectible;
+	mlx_image_t *img_worm;
 	mlx_image_t *img_wall;
 	mlx_image_t *img_floor;
 	int	move_count;
@@ -66,12 +66,11 @@ void	game_init(t_game *game, t_map *map);
 void	handle_click(mlx_key_data_t keydata, void *parameter);
 void	safe_exit(t_map *map);
 void 	error_exit(char *message, t_map *map);
-void	render_image(mlx_t *mlx, mlx_image_t *img, int x, int y);
-void	convert_to_image(t_game *game, char *path, mlx_image_t **item);
 void	check_valid_player_position(t_map *map);
 void	close_game(void *parameter);
 int		flood_check(t_map *map, int (*func)(char **, t_map *, t_coords));
-int	flood_fill_items(char **copy_map, t_map *map, t_coords player);
+int		flood_fill_items(char **copy_map, t_map *map, t_coords player);
 int		flood_fill_exit(char **copy_map, t_map *map, t_coords player);
+void	render_game(t_game *game, t_map *map);
 
 #endif

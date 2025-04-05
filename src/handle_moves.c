@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 13:25:43 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/05 13:28:19 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/05 14:03:10 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	update_collectible(t_game *game, int new_x, int new_y)
 	size_t	i;
 	
 	i = 0;
-	while (i < game->img_collectible->count)
+	while (i < game->img_worm->count)
 	{
-		if (game->img_collectible->instances[i].x == new_x * T_SIZE &&
-			game->img_collectible->instances[i].y == new_y * T_SIZE)
-			game->img_collectible->instances[i].enabled = false;
+		if (game->img_worm->instances[i].x == new_x * T_SIZE &&
+			game->img_worm->instances[i].y == new_y * T_SIZE)
+			game->img_worm->instances[i].enabled = false;
 		i++;
 	}
 	game->map->collectibles--;
