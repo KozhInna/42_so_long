@@ -6,13 +6,13 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:27:41 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/05 11:42:48 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/05 12:58:49 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void check_argv_exist(int argc, char **argv)
+static void check_argv_count(int argc, char **argv)
 {
 	if (argc != 2)
 	{
@@ -33,18 +33,18 @@ static void	check_file_extension(char **argv)
 	dot_ptr = ft_strrchr(argv[1], '.');
 	if (!dot_ptr || ft_strcmp(dot_ptr, ".ber") != 0)
 	{
-		ft_printf("Error\nUsage: %s %s (file must have .ber extension)\n", argv[0], argv[1]);
+		ft_printf("Error\nUsage: ./so_long %s (map must have .ber extension)\n", argv[1]);
 		exit(1);
 	}
 	if (ft_strcmp(argv[1], ".ber") == 0)
 	{
-		ft_printf("Error\nUsage: %s %s (file can't be a hidden file)\n", argv[0], argv[1]);
+		ft_printf("Error\nUsage: ./so_long %s (map can't be a hidden file)\n", argv[1]);
 		exit(1);
 	}
 }
 
 void validate_argv(int argc, char **argv)
 {
-	check_argv_exist(argc, argv);
+	check_argv_count(argc, argv);
 	check_file_extension(argv);
 }
