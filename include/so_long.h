@@ -6,18 +6,18 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:49:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/06 10:59:52 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/06 23:00:20 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include <MLX42/MLX42.h>
-# define T_SIZE 100
 # include "libft.h"
+# include <MLX42/MLX42.h>
 # include <fcntl.h>
 
+# define T_SIZE 100
 # define WALL "./textures/coral.png"
 # define FLOOR "./textures/water.png"
 # define ITEM "./textures/worm.png"
@@ -57,15 +57,15 @@ typedef struct game
 void	validate_argv(int argc, char **argv);
 t_map	*validate_map(char *map_file);
 t_map	*parse_map(char *map_file);
-void	game_init(t_game *game, t_map *map);
-void	handle_click(mlx_key_data_t keydata, void *parameter);
-void	safe_exit(t_map *map);
-void 	error_exit(char *message, t_map *map);
 void	check_valid_player_position(t_map *map);
-void	close_game(void *parameter);
 int		flood_check(t_map *map, int (*func)(char **, t_map *, t_coords));
 int		flood_fill_items(char **copy_map, t_map *map, t_coords player);
 int		flood_fill_exit(char **copy_map, t_map *map, t_coords player);
+void	game_init(t_game *game, t_map *map);
 void	render_game(t_game *game, t_map *map);
+void	handle_click(mlx_key_data_t keydata, void *parameter);
+void	close_game(void *parameter);
+void	safe_exit(t_map *map);
+void 	error_exit(char *message, t_map *map);
 
 #endif

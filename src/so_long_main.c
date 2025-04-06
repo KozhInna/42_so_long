@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:51:03 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/03 08:50:09 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/06 22:28:55 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	validate_argv(argc, argv);
 	map = validate_map(argv[1]);
 	if (!map)
-		exit(EXIT_FAILURE);
+		exit(1);
 	game_init(&game, map);
 	mlx_close_hook(game.mlx, close_game, &game);
 	mlx_key_hook(game.mlx, handle_click, &game);

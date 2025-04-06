@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:52:00 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/03/24 15:06:41 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/06 22:33:06 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdarg.h>
 # include <stdint.h>
 
-# define BUFFER_SIZE 2
+# define BUFFER_SIZE 256
 
 // Linked List Struct
 typedef struct s_list
