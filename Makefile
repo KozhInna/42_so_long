@@ -6,7 +6,7 @@
 #    By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/21 14:44:32 by ikozhina          #+#    #+#              #
-#    Updated: 2025/04/05 14:18:48 by ikozhina         ###   ########.fr        #
+#    Updated: 2025/04/06 10:57:21 by ikozhina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,11 @@ NAME = so_long
 
 CC = cc
 
-FLAGS = -Werror -Wextra -Wall -I./libft -I./include -I./MLX42/include -Wunreachable-code -Ofast
+FLAGS = -Werror -Wextra -Wall -Wunreachable-code -Ofast
 LDFLAGS = -lglfw -L"/opt/homebrew/Cellar/glfw/3.4/lib/" -framework Cocoa -framework OpenGL -framework IOKit
 # LDFLAGS = -ldl -lglfw -pthread -lm
+
+HEADERS = -I./libft -I./include -I./MLX42/include
 
 MLX_PATH = ./MLX42
 MLX_REPO = https://github.com/codam-coding-college/MLX42.git
@@ -35,7 +37,7 @@ LIBFT_PATH = libft
 all: $(LIBFT) $(MLXLIB) $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLXLIB)
-	$(CC) $(FLAGS) $(OBJS) $(LIBFT) $(MLXLIB) $(LDFLAGS) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) $(LIBFT) $(MLXLIB) $(LDFLAGS) $(HEADERS) -o $(NAME)
 
 #Clone and build MLX42
 $(MLXLIB): $(MLX_PATH)
@@ -60,7 +62,7 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_PATH)
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) $(HEADERS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

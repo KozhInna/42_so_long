@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:49:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/05 14:20:26 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:59:52 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@
 # define T_SIZE 100
 # include "libft.h"
 # include <fcntl.h>
-
-/*delete lib below*/
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
 
 # define WALL "./textures/coral.png"
 # define FLOOR "./textures/water.png"

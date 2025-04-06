@@ -6,11 +6,11 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:14:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/05 14:09:22 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:48:33 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"so_long.h"
+#include "so_long.h"
 
 void	convert_to_image(t_game *game, char *path, mlx_image_t **item)
 {

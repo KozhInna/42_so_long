@@ -6,11 +6,11 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 13:25:43 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/05 14:03:10 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:48:36 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"so_long.h"
+#include "so_long.h"
 
 void	update_player_position(t_game *game, int new_x, int new_y)
 {

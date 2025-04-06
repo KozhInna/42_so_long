@@ -6,11 +6,11 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 13:50:50 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/05 14:14:10 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:48:45 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"so_long.h"
+#include "so_long.h"
 
 void	render_img(mlx_t *mlx, mlx_image_t *img, int x, int y)
 {

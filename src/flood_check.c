@@ -6,11 +6,11 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:41:02 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/04 14:45:27 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:48:49 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"so_long.h"
+#include "so_long.h"
 
 int		flood_fill_exit(char **copy_map, t_map *map, t_coords player)
 {
