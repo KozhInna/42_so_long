@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 12:32:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/05 11:29:14 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:01:51 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ t_map	*validate_map(char *map_file)
 	map = parse_map(map_file);
 	if (!map)
 	{
-		safe_exit(map);
-		exit(1);
+		free_map(map);
+		return (NULL);
 	}
 	is_ractangular(map);
 	check_walls(map);

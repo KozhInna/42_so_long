@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 13:25:43 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/06 10:48:36 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:57:08 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	update_player_position(t_game *game, int new_x, int new_y)
 void	update_collectible(t_game *game, int new_x, int new_y)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (i < game->img_worm->count)
 	{
@@ -55,9 +55,8 @@ void handle_move(t_game *game, int new_x, int new_y)
 		update_player_position(game, new_x, new_y);
 	if (tile == 'E' && game->map->collectibles == 0)
 	{
-		safe_exit(game->map);
 		ft_putstr_fd("Congratulations! You won!\n", 1);
-		exit(0);
+		close_game(game);
 	}
 }
 
@@ -66,9 +65,10 @@ void	close_game(void *parameter)
 	t_game *game;
 
 	game = (t_game *)parameter;
+	free_map(game->map);
+	free_game_img(game);
 	if(game->mlx)
 		mlx_terminate(game->mlx);
-	safe_exit(game->map);
 	exit(0);
 }
 

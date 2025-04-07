@@ -6,13 +6,13 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:48:49 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/06 10:48:41 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:52:55 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	safe_exit(t_map *map)
+void	free_map(t_map *map)
 {
 	int i;
 
@@ -28,11 +28,25 @@ void	safe_exit(t_map *map)
 	free(map->map_data);
 	map->map_data = NULL;
 	free(map);
-	map = NULL;
 }
+
+void	free_game_img(t_game *game)
+{
+	if (game->img_exit)
+		mlx_delete_image(game->mlx, game->img_exit);
+	if (game->img_floor)
+		mlx_delete_image(game->mlx, game->img_floor);
+	if (game->img_player)
+		mlx_delete_image(game->mlx, game->img_player);
+	if (game->img_wall)
+		mlx_delete_image(game->mlx, game->img_wall);
+	if (game->img_worm)
+		mlx_delete_image(game->mlx, game->img_worm);
+}
+
 void error_exit(char *message, t_map *map)
 {
 	ft_putstr_fd(message, 2);
-	safe_exit(map);
+	free_map(map);
 	exit(1);
 }

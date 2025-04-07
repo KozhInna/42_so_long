@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:14:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/06 23:09:22 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:54:28 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,23 @@ void	convert_to_image(t_game *game, char *path, mlx_image_t **item)
 	mlx_texture_t* texture;
 	texture = mlx_load_png(path);
 	if (!texture)
+	{
+		free_map(game->map);
+		free_game_img(game);
+		if(game->mlx)
+			mlx_terminate(game->mlx);
 		exit(1);
+	}
 	(*item) = mlx_texture_to_image(game->mlx, texture);
 	if (!(*item))
+	{
+		mlx_delete_texture(texture);
+		free_map(game->map);
+		free_game_img(game);
+		if(game->mlx)
+			mlx_terminate(game->mlx);
 		exit(1);
+	}
 	mlx_delete_texture(texture);
 }
 

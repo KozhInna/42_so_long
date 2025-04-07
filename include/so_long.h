@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:49:20 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/06 23:00:20 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:06:47 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	game_init(t_game *game, t_map *map);
 void	render_game(t_game *game, t_map *map);
 void	handle_click(mlx_key_data_t keydata, void *parameter);
 void	close_game(void *parameter);
-void	safe_exit(t_map *map);
-void 	error_exit(char *message, t_map *map);
+void	free_map(t_map *map);
+void	free_game_img(t_game *game);
+void	error_exit(char *message, t_map *map);
 
 #endif

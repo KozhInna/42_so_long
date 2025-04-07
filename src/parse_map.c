@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:18:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/06 10:48:56 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:59:18 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	store_map_line(char *line_read, t_map *map, int i)
 	free(line_read);
 	if (!map->map_data[i])
 	{
-		while (i > 0)
+		while (i >= 0)
 			free(map->map_data[--i]);
 		free(map->map_data);
 		free(map);
@@ -96,7 +96,10 @@ void	read_and_store_map_lines(int fd, t_map *map)
 		if (line_read == NULL)
 			break ;
 		if (store_map_line(line_read, map, i) != 0)
-			exit(1);
+		{
+			free(line_read);
+			return ;
+		}
 		i++;
 	}
 }
@@ -104,7 +107,7 @@ void	read_and_store_map_lines(int fd, t_map *map)
 t_map	*parse_map(char *map_file)
 {
 	int		fd;
-	int	rows;
+	int		rows;
 	t_map	*map;
 
 	map = NULL;
@@ -121,7 +124,10 @@ t_map	*parse_map(char *map_file)
 		return (NULL);
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
+	{
+		free(map);
 		return (NULL);
+	}
 	read_and_store_map_lines(fd, map);
 	close(fd);
 	return(map);
