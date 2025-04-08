@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:18:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/07 14:59:18 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:44:08 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	initialise_map(t_map **map, int rows)
 int	count_rows(int fd)
 {
 	char	*line_read;
-	int	rows_count;
+	int		rows_count;
 
 	line_read = NULL;
 	rows_count = 0;
@@ -83,25 +83,33 @@ int	store_map_line(char *line_read, t_map *map, int i)
 	return (0);
 }
 
-void	read_and_store_map_lines(int fd, t_map *map)
+void	read_and_store_map_lines(int fd, t_map **map)
 {
 	char	*line_read;
-	int	i;
+	int		i;
 
 	line_read = NULL;
 	i = 0;
-	while (i < map->rows)
+	while (i < (*map)->rows)
 	{
 		line_read = get_next_line(fd);
 		if (line_read == NULL)
 			break ;
-		if (store_map_line(line_read, map, i) != 0)
+		if (store_map_line(line_read, (*map), i) != 0)
 		{
-			free(line_read);
+			(*map) = NULL;
 			return ;
 		}
 		i++;
 	}
+	// if (!(*map)->map_data[i])
+	// {
+	// 	while (i >= 0)
+	// 		free((*map)->map_data[i--]);
+	// 	free((*map)->map_data);
+	// 	free((*map));
+	// 	(*map) = NULL;
+	// }
 }
 
 t_map	*parse_map(char *map_file)
@@ -113,10 +121,7 @@ t_map	*parse_map(char *map_file)
 	map = NULL;
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
-	{
-		ft_putstr_fd("Error\nMap doesn't exist in this directory\n", 2);
-		return (NULL);
-	}
+		error_exit("Error\nMap doesn't exist in this directory\n", map);
 	rows = count_rows(fd);
 	close(fd);
 	initialise_map(&map, rows);
@@ -124,11 +129,8 @@ t_map	*parse_map(char *map_file)
 		return (NULL);
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
-	{
-		free(map);
-		return (NULL);
-	}
-	read_and_store_map_lines(fd, map);
+		error_exit("Error\nFailed to open map\n", map);
+	read_and_store_map_lines(fd, &map);
 	close(fd);
-	return(map);
+	return (map);
 }

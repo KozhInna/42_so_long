@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:48:49 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/07 14:52:55 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:59:15 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_map(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!map)
@@ -44,9 +44,21 @@ void	free_game_img(t_game *game)
 		mlx_delete_image(game->mlx, game->img_worm);
 }
 
-void error_exit(char *message, t_map *map)
+void	error_close_game(char *msg, t_game *game, t_map *map)
 {
-	ft_putstr_fd(message, 2);
+	if (msg)
+		ft_putstr_fd(msg, 2);
+	free_map(map);
+	free_game_img(game);
+	if (game->mlx)
+		mlx_terminate(game->mlx);
+	exit(1);
+}
+
+void	error_exit(char *msg, t_map *map)
+{
+	if (msg)
+		ft_putstr_fd(msg, 2);
 	free_map(map);
 	exit(1);
 }

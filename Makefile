@@ -6,7 +6,7 @@
 #    By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/21 14:44:32 by ikozhina          #+#    #+#              #
-#    Updated: 2025/04/06 10:57:21 by ikozhina         ###   ########.fr        #
+#    Updated: 2025/04/07 09:46:17 by ikozhina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,7 @@ NAME = so_long
 CC = cc
 
 FLAGS = -Werror -Wextra -Wall -Wunreachable-code -Ofast
-LDFLAGS = -lglfw -L"/opt/homebrew/Cellar/glfw/3.4/lib/" -framework Cocoa -framework OpenGL -framework IOKit
-# LDFLAGS = -ldl -lglfw -pthread -lm
+LDFLAGS = -ldl -lglfw -pthread -lm
 
 HEADERS = -I./libft -I./include -I./MLX42/include
 

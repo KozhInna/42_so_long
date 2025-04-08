@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 13:25:43 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/07 14:57:08 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:55:50 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	update_player_position(t_game *game, int new_x, int new_y)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = game->map->player.x;
 	y = game->map->player.y;
@@ -28,6 +28,7 @@ void	update_player_position(t_game *game, int new_x, int new_y)
 	game->move_count += 1;
 	ft_printf("Current move: %d\n", game->move_count);
 }
+
 void	update_collectible(t_game *game, int new_x, int new_y)
 {
 	size_t	i;
@@ -35,16 +36,17 @@ void	update_collectible(t_game *game, int new_x, int new_y)
 	i = 0;
 	while (i < game->img_worm->count)
 	{
-		if (game->img_worm->instances[i].x == new_x * T_SIZE &&
-			game->img_worm->instances[i].y == new_y * T_SIZE)
+		if (game->img_worm->instances[i].x == new_x * T_SIZE
+			&& game->img_worm->instances[i].y == new_y * T_SIZE)
 			game->img_worm->instances[i].enabled = false;
 		i++;
 	}
 	game->map->collectibles--;
 }
-void handle_move(t_game *game, int new_x, int new_y)
+
+void	handle_move(t_game *game, int new_x, int new_y)
 {
-	char tile;
+	char	tile;
 
 	tile = game->map->map_data[new_y][new_x];
 	if (tile == '1')
@@ -62,21 +64,21 @@ void handle_move(t_game *game, int new_x, int new_y)
 
 void	close_game(void *parameter)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = (t_game *)parameter;
 	free_map(game->map);
 	free_game_img(game);
-	if(game->mlx)
+	if (game->mlx)
 		mlx_terminate(game->mlx);
 	exit(0);
 }
 
 void	handle_click(mlx_key_data_t keydata, void *parameter)
 {
-	t_game *game;
-	int x;
-	int y;
+	t_game	*game;
+	int		x;
+	int		y;
 
 	game = (t_game *)parameter;
 	x = game->map->player.x;
@@ -92,4 +94,3 @@ void	handle_click(mlx_key_data_t keydata, void *parameter)
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
 		handle_move(game, x + 1, y);
 }
-

@@ -6,19 +6,19 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:41:02 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/06 10:48:49 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:11:03 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int		flood_fill_exit(char **copy_map, t_map *map, t_coords player)
+int	flood_fill_exit(char **copy_map, t_map *map, t_coords player)
 {
-	int found;
-	int x;
-	int y;
-	int x2;
-	int y2;
+	int	found;
+	int	x;
+	int	y;
+	int	x2;
+	int	y2;
 
 	x = player.x;
 	y = player.y;
@@ -39,9 +39,9 @@ int		flood_fill_exit(char **copy_map, t_map *map, t_coords player)
 
 int	flood_fill_items(char **copy_map, t_map *map, t_coords player)
 {
-	int found;
-	int x;
-	int y;
+	int	found;
+	int	x;
+	int	y;
 
 	found = 0;
 	x = player.x;
@@ -60,15 +60,15 @@ int	flood_fill_items(char **copy_map, t_map *map, t_coords player)
 	return (found);
 }
 
-char **allocate_memory(t_map *map)
+char	**allocate_memory(t_map *map)
 {
-	char **new_map;
-	int i;
+	char	**new_map;
+	int		i;
 
 	i = 0;
 	new_map = malloc(sizeof(char *) * map->rows);
 	if (!new_map)
-		return NULL;
+		return (NULL);
 	while (i < map->rows)
 	{
 		new_map[i] = malloc(sizeof(char) * (map->cols + 1));
@@ -81,19 +81,19 @@ char **allocate_memory(t_map *map)
 		}
 		i++;
 	}
-	return(new_map);
+	return (new_map);
 }
 
-char **copy_map(t_map *map)
+char	**copy_map(t_map *map)
 {
-	char **new_map;
-	int i;
-	int j;
+	char	**new_map;
+	int		i;
+	int		j;
 
 	i = 0;
 	new_map = allocate_memory(map);
 	if (!new_map)
-		return NULL;
+		return (NULL);
 	while (i < map->rows)
 	{
 		j = 0;
@@ -110,14 +110,14 @@ char **copy_map(t_map *map)
 
 int	flood_check(t_map *map, int (*func)(char **, t_map *, t_coords))
 {
-	int i;
-	int result;
-	char **copied_map;
+	int		i;
+	int		result;
+	char	**copied_map;
 
 	i = 0;
 	copied_map = copy_map(map);
 	if (!copied_map)
-		exit (1);
+		error_exit("Failed to copy map\n", map);
 	result = func(copied_map, map, map->player);
 	while (i < map->rows)
 		free(copied_map[i++]);

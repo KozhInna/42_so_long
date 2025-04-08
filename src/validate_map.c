@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 12:32:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/07 15:01:51 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:52:11 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	is_ractangular(t_map *map)
 {
-	int i;
+	int	i;
 
 	map->cols = ft_strlen(map->map_data[0]);
 	i = 1;
@@ -29,8 +29,8 @@ void	is_ractangular(t_map *map)
 
 void	check_walls(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < map->rows)
@@ -50,8 +50,8 @@ void	check_walls(t_map *map)
 
 void	check_valid_components(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < map->rows)
@@ -70,7 +70,7 @@ void	check_valid_components(t_map *map)
 				map->exit.y = i;
 			}
 			if (!ft_strchr("01CEP", map->map_data[i][j]))
-				error_exit("Error\nMap must be composed of only these characters: 0, 1, C, E, P\n", map);
+				error_exit("Error\nMap must have only: 0, 1, C, E, P\n", map);
 			j++;
 		}
 		i++;
@@ -79,9 +79,9 @@ void	check_valid_components(t_map *map)
 
 void	count_collectibles(t_map *map)
 {
-	int i;
-	int j;
-	int count;
+	int	i;
+	int	j;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -101,14 +101,11 @@ void	count_collectibles(t_map *map)
 
 t_map	*validate_map(char *map_file)
 {
-	t_map *map;
+	t_map	*map;
 
 	map = parse_map(map_file);
-	if (!map)
-	{
-		free_map(map);
-		return (NULL);
-	}
+	if (map == NULL)
+		exit(1);
 	is_ractangular(map);
 	check_walls(map);
 	check_valid_components(map);

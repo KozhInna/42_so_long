@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:11:08 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/05 11:29:35 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:04:05 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	check_duplicates(t_map *map)
 {
-	int i;
-	int j;
-	int player;
-	int out;
+	int	i;
+	int	j;
+	int	player;
+	int	out;
 
 	player = 0;
 	out = 0;
@@ -36,13 +36,14 @@ void	check_duplicates(t_map *map)
 		i++;
 	}
 	if (player != 1 || out != 1 || map->collectibles < 1)
-		error_exit("Error\nMap must contain exactly 1 exit, 1 player and at least 1 collectible\n", map);
+		error_exit("Error\nMap must have 1 exit, 1 player, at least 1 worm\n",
+			map);
 }
 
 void	check_valid_player_position(t_map *map)
 {
-	int collected;
-	int exit_reached;
+	int	collected;
+	int	exit_reached;
 
 	check_duplicates(map);
 	collected = flood_check(map, flood_fill_items);
