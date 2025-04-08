@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:18:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/08 14:44:08 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:08:11 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,15 @@ void	read_and_store_map_lines(int fd, t_map **map)
 		}
 		i++;
 	}
-	// if (!(*map)->map_data[i])
-	// {
-	// 	while (i >= 0)
-	// 		free((*map)->map_data[i--]);
-	// 	free((*map)->map_data);
-	// 	free((*map));
-	// 	(*map) = NULL;
-	// }
+	//if i bigger than 0, but if it is 0 i don't need -1
+	if (!(*map)->map_data[i - 1])
+	{
+		while (i >= 0)
+			free((*map)->map_data[i--]);
+		free((*map)->map_data);
+		free((*map));
+		(*map) = NULL;
+	}
 }
 
 t_map	*parse_map(char *map_file)
