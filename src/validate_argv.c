@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:27:41 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/08 12:43:36 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:29:28 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	check_file_extension(char **argv)
 {
 	char	*dot_ptr;
 	char	*slash_ptr;
+	char	*file_name;
 
 	dot_ptr = ft_strrchr(argv[1], '.');
 	if (!dot_ptr || ft_strcmp(dot_ptr, ".ber") != 0)
@@ -41,7 +42,12 @@ static void	check_file_extension(char **argv)
 		exit(1);
 	}
 	slash_ptr = ft_strrchr(argv[1], '/');
-	if (ft_strcmp(slash_ptr + 1, ".ber") == 0)
+	if (slash_ptr)
+		file_name = slash_ptr + 1;
+	else
+		file_name = argv[1];
+
+	if (file_name[0] == '.')
 	{
 		ft_printf("Error\nUsage: ./so_long %s (map can't be a hidden file)\n",
 			argv[1]);
