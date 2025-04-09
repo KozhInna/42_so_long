@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 12:32:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/08 13:52:11 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:49:59 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,20 @@
 void	is_ractangular(t_map *map)
 {
 	int	i;
+	int	str_len;
 
 	map->cols = ft_strlen(map->map_data[0]);
+	if (map->cols < 4 && map->rows < 4)
+		error_exit("Error\nMap is to small to contain all components\n", map);
 	i = 1;
 	while (i < map->rows)
 	{
-		if (map->cols != (int)ft_strlen(map->map_data[i++]))
+		str_len = (int)ft_strlen(map->map_data[i]);
+		if (str_len == 0)
+			error_exit("Error\nEmpty lines in map\n", map);
+		if (map->cols != str_len)
 			error_exit("Error\nMap must be rectangular\n", map);
+		i++;
 	}
 	if (map->rows == map->cols)
 		error_exit("Error\nMap must be rectangular\n", map);
@@ -106,6 +113,8 @@ t_map	*validate_map(char *map_file)
 	map = parse_map(map_file);
 	if (map == NULL)
 		exit(1);
+	if (ft_strlen(map->map_data[0]) == 0 || map->map_data[0][0] == ' ')
+		error_exit("Error\nMap must start at the top of the file\n", map);
 	is_ractangular(map);
 	check_walls(map);
 	check_valid_components(map);

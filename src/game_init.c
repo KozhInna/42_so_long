@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 12:14:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/08 14:22:59 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:55:46 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	game_init(t_game *game, t_map *map)
 
 	initialise_struct(game);
 	game->map = map;
-	game->mlx = mlx_init(map->cols * T_SIZE, map->rows * T_SIZE, "so_long", false);
+	game->mlx = mlx_init(map->cols * T_SIZE, map->rows * T_SIZE, "so_long",
+			false);
 	if (!game->mlx)
 		error_close_game("MLX failed to initialize\n", game, game->map);
 	mlx_get_monitor_size(0, &screen_width, &screen_height);

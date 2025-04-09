@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:18:34 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/08 15:29:57 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:55:37 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	initialise_map(t_map **map, int rows)
 		(*map)->map_data[i++] = NULL;
 }
 
-int	count_rows(int fd)
+int	count_rows(int fd, t_map *map)
 {
 	char	*line_read;
 	int		rows_count;
@@ -58,6 +58,8 @@ int	count_rows(int fd)
 			free(line_read);
 		}
 	}
+	if (rows_count == 0)
+		error_exit("Error\nEmpty map or read failed\n", map);
 	return (rows_count);
 }
 
@@ -116,7 +118,7 @@ t_map	*parse_map(char *map_file)
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
 		error_exit("Error\nMap doesn't exist in this directory\n", map);
-	rows = count_rows(fd);
+	rows = count_rows(fd, map);
 	close(fd);
 	initialise_map(&map, rows);
 	if (!map)

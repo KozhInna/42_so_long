@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:11:08 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/08 10:04:05 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:53:51 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	check_valid_player_position(t_map *map)
 	check_duplicates(map);
 	collected = flood_check(map, flood_fill_items);
 	if (collected != map->collectibles)
-		error_exit("Error\nCan't collect all worms.\n", map);
+		error_exit("Error\nCan't collect all worms\n", map);
 	exit_reached = flood_check(map, flood_fill_exit);
 	if (!exit_reached)
-		error_exit("Error\nPath to the exit is not valid.\n", map);
+		error_exit("Error\nPath to the exit is not valid\n", map);
 }
