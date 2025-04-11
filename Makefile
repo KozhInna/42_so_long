@@ -6,7 +6,7 @@
 #    By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/21 14:44:32 by ikozhina          #+#    #+#              #
-#    Updated: 2025/04/07 09:46:17 by ikozhina         ###   ########.fr        #
+#    Updated: 2025/04/11 11:15:37 by ikozhina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,16 +46,6 @@ $(MLXLIB): $(MLX_PATH)
 $(MLX_PATH):
 	git clone $(MLX_REPO) $(MLX_PATH)
 
-mlx_update:
-	@if [ -d "$(MLX_PATH)" ]; then \
-		echo "Updating MLX42..."; \
-		cd $(MLX_PATH) && git pull && \
-		cmake -B build -S . -DGLFW_BUILD_DOCS=OFF -DGLFW_BUILD_TESTS=OFF -DGLFW_BUILD_EXAMPLES=OFF && \
-		cmake --build build; \
-	else \
-		echo "MLX42 not found. Run 'make' to clone and build."; \
-	fi
-
 # Build libft
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_PATH)
@@ -75,4 +65,4 @@ fclean: clean
 
 re:	fclean all
 
-.PHONY: all clean fclean re mlx_update
+.PHONY: all clean fclean re
