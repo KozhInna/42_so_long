@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 12:32:19 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/09 10:49:59 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:24:46 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	is_ractangular(t_map *map)
 	int	str_len;
 
 	map->cols = ft_strlen(map->map_data[0]);
-	if (map->cols < 4 && map->rows < 4)
-		error_exit("Error\nMap is to small to contain all components\n", map);
 	i = 1;
 	while (i < map->rows)
 	{
@@ -30,8 +28,6 @@ void	is_ractangular(t_map *map)
 			error_exit("Error\nMap must be rectangular\n", map);
 		i++;
 	}
-	if (map->rows == map->cols)
-		error_exit("Error\nMap must be rectangular\n", map);
 }
 
 void	check_walls(t_map *map)
