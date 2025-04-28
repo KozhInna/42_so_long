@@ -6,7 +6,7 @@
 /*   By: ikozhina <ikozhina@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 09:58:14 by ikozhina          #+#    #+#             */
-/*   Updated: 2025/04/06 11:47:37 by ikozhina         ###   ########.fr       */
+/*   Updated: 2025/04/28 21:59:19 by ikozhina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*ft_strjoin_up_nl(char const *s1, char const *s2);
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE];
+	static char	buffer[BUFFER_SIZE + 1];
 	char		*line;
 	int			status;
 
